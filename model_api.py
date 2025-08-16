@@ -5,6 +5,8 @@ import cv2, numpy as np, base64, os
 from insightface.app import FaceAnalysis
 from pathlib import Path
 import io
+import uvicorn
+
 
 
 app = FastAPI()
@@ -169,3 +171,7 @@ async def recognize_classroom(file: UploadFile = File(...)):
     save_base64_image(result["annotated_unrecognized"], "debug_unrec_faces.jpg")
 
     return JSONResponse(result)
+
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=7860)
